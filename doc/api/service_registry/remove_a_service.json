@@ -1,0 +1,51 @@
+{
+  "resource": "Service Registry",
+  "resource_explanation": null,
+  "http_method": "DELETE",
+  "route": "/api/service_registries/:id",
+  "description": "remove a service",
+  "explanation": "returns status for removed service",
+  "parameters": [
+    {
+      "scope": "service_registry",
+      "required": true,
+      "name": "id",
+      "description": "id of service"
+    }
+  ],
+  "response_fields": [
+    {
+      "scope": "service_registry",
+      "name": "service",
+      "description": "name of service"
+    },
+    {
+      "scope": "service_registry",
+      "name": "status",
+      "description": "service status"
+    }
+  ],
+  "requests": [
+    {
+      "request_method": "DELETE",
+      "request_path": "/api/service_registries/1",
+      "request_body": null,
+      "request_headers": {
+        "Content-Type": "application/json",
+        "Host": "example.org"
+      },
+      "request_query_parameters": {
+        "{\"service_registry\":{\"id\":1}}": null
+      },
+      "request_content_type": "application/json",
+      "response_status": 200,
+      "response_status_text": "OK",
+      "response_body": "{\n  \"status\": 204,\n  \"message\": \"successfully removed service\",\n  \"data\": {\n    \"status\": \"removed\"\n  }\n}",
+      "response_headers": {
+        "Content-Type": "application/json; charset=utf-8"
+      },
+      "response_content_type": "application/json; charset=utf-8",
+      "curl": "curl \"http://localhost:3000/api/service_registries/1\" -d '' -X DELETE \\\n\t-H \"Accept: application/json\" \\\n\t-H \"Content-Type: application/json\" \\\n\t-H \"Host: example.org\" \\\n\t-H \"Cookie: \""
+    }
+  ]
+}

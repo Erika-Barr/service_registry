@@ -1,0 +1,61 @@
+{
+  "resource": "Service Registry",
+  "resource_explanation": null,
+  "http_method": "POST",
+  "route": "/api/service_registries",
+  "description": "Create a service",
+  "explanation": "Create a service in service registry",
+  "parameters": [
+    {
+      "scope": "service_registry",
+      "required": true,
+      "name": "service",
+      "description": "name of service"
+    },
+    {
+      "scope": "service_registry",
+      "required": true,
+      "name": "version",
+      "description": "version number of service"
+    }
+  ],
+  "response_fields": [
+    {
+      "scope": "service_registry",
+      "name": "service",
+      "description": "name of service"
+    },
+    {
+      "scope": "service_registry",
+      "name": "version",
+      "description": "version number of service"
+    },
+    {
+      "scope": "service_registry",
+      "name": "status",
+      "description": "service status"
+    }
+  ],
+  "requests": [
+    {
+      "request_method": "POST",
+      "request_path": "/api/service_registries",
+      "request_body": "{\"service_registry\":{\"service\":\"test1\",\"version\":\"1.0.0\"}}",
+      "request_headers": {
+        "Content-Type": "application/json",
+        "Host": "example.org"
+      },
+      "request_query_parameters": {
+      },
+      "request_content_type": "application/json",
+      "response_status": 200,
+      "response_status_text": "OK",
+      "response_body": "{\n  \"status\": 201,\n  \"message\": \"successfully created service\",\n  \"data\": {\n    \"service\": \"test1\",\n    \"version\": \"1.0.0\",\n    \"status\": \"created\"\n  }\n}",
+      "response_headers": {
+        "Content-Type": "application/json; charset=utf-8"
+      },
+      "response_content_type": "application/json; charset=utf-8",
+      "curl": "curl \"http://localhost:3000/api/service_registries\" -d '{\"service_registry\":{\"service\":\"test1\",\"version\":\"1.0.0\"}}' -X POST \\\n\t-H \"Accept: application/json\" \\\n\t-H \"Content-Type: application/json\" \\\n\t-H \"Host: example.org\" \\\n\t-H \"Cookie: \""
+    }
+  ]
+}

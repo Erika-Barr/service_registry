@@ -1,0 +1,59 @@
+{
+  "resources": [
+    {
+      "name": "Service Registry",
+      "explanation": null,
+      "examples": [
+        {
+          "description": "Return all services",
+          "link": "service_registry/return_all_services.json",
+          "groups": "all",
+          "route": "/api/service_registries",
+          "method": "get"
+        },
+        {
+          "description": "Create a service",
+          "link": "service_registry/create_a_service.json",
+          "groups": "all",
+          "route": "/api/service_registries",
+          "method": "post"
+        },
+        {
+          "description": "search for a service with a specific version",
+          "link": "service_registry/search_for_a_service_with_a_specific_version.json",
+          "groups": "all",
+          "route": "/api/service_registries/with_version",
+          "method": "get"
+        },
+        {
+          "description": "search for a service WITHOUT a specific version",
+          "link": "service_registry/search_for_a_service_without_a_specific_version.json",
+          "groups": "all",
+          "route": "/api/service_registries/without_version",
+          "method": "get"
+        },
+        {
+          "description": "search for a service that does not exist",
+          "link": "service_registry/search_for_a_service_that_does_not_exist.json",
+          "groups": "all",
+          "route": "/api/service_registries/with_version",
+          "method": "get"
+        },
+        {
+          "description": "update a service",
+          "link": "service_registry/update_a_service.json",
+          "groups": "all",
+          "route": "/api/service_registries/:id",
+          "method": "put"
+        },
+        {
+          "description": "remove a service",
+          "link": "service_registry/remove_a_service.json",
+          "groups": "all",
+          "route": "/api/service_registries/:id",
+          "method": "delete"
+        }
+      ]
+    }
+  ]
+}

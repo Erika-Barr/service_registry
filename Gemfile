@@ -28,7 +28,7 @@ gem 'puma', '~> 3.7'
 group :development, :test do
   gem 'rspec-rails'
   gem 'rspec_api_documentation'
-  gem 'raddocs'
+  gem 'apitome'
   gem 'factory_bot_rails'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
