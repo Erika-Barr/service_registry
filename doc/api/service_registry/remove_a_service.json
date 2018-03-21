@@ -7,7 +7,6 @@
   "explanation": "returns status for removed service",
   "parameters": [
     {
-      "scope": "service_registry",
       "required": true,
       "name": "id",
       "description": "id of service"
@@ -15,12 +14,10 @@
   ],
   "response_fields": [
     {
-      "scope": "service_registry",
       "name": "service",
       "description": "name of service"
     },
     {
-      "scope": "service_registry",
       "name": "status",
       "description": "service status"
     }
@@ -35,12 +32,12 @@
         "Host": "example.org"
       },
       "request_query_parameters": {
-        "{\"service_registry\":{\"id\":1}}": null
+        "{}": null
       },
       "request_content_type": "application/json",
       "response_status": 200,
       "response_status_text": "OK",
-      "response_body": "{\n  \"status\": 204,\n  \"message\": \"successfully removed service\",\n  \"data\": {\n    \"status\": \"removed\"\n  }\n}",
+      "response_body": "{\n  \"data\": {\n    \"id\": \"1\",\n    \"type\": \"service_registry\",\n    \"attributes\": {\n      \"service\": \"test\",\n      \"version\": \"1.0.0\",\n      \"status\": \"removed\"\n    }\n  },\n  \"meta\": {\n    \"message\": \"successfully removed service\"\n  }\n}",
       "response_headers": {
         "Content-Type": "application/json; charset=utf-8"
       },

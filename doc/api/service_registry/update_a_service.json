@@ -7,31 +7,25 @@
   "explanation": "update a service instance in the registry",
   "parameters": [
     {
-      "scope": "service_registry",
       "required": true,
       "name": "id",
       "description": "id of service"
     },
     {
-      "scope": "service_registry",
-      "required": true,
-      "name": "data",
+      "name": "service",
       "description": "data to update service"
     }
   ],
   "response_fields": [
     {
-      "scope": "service_registry",
       "name": "service",
       "description": "name of service"
     },
     {
-      "scope": "service_registry",
       "name": "version",
       "description": "version number of service"
     },
     {
-      "scope": "service_registry",
       "name": "status",
       "description": "service status"
     }
@@ -40,7 +34,7 @@
     {
       "request_method": "PUT",
       "request_path": "/api/service_registries/1",
-      "request_body": "{\"service_registry\":{\"id\":1,\"data\":\"test_updated\"}}",
+      "request_body": "{\"service\":\"test_updated\"}",
       "request_headers": {
         "Content-Type": "application/json",
         "Host": "example.org"
@@ -50,12 +44,12 @@
       "request_content_type": "application/json",
       "response_status": 200,
       "response_status_text": "OK",
-      "response_body": "{\n  \"status\": 204,\n  \"message\": \"successfully updated service record\",\n  \"data\": {\n    \"service\": \"test_updated\",\n    \"version\": \"1.0.0\",\n    \"status\": \"updated\"\n  }\n}",
+      "response_body": "{\n  \"data\": {\n    \"id\": \"1\",\n    \"type\": \"service_registry\",\n    \"attributes\": {\n      \"service\": \"test_updated\",\n      \"version\": \"1.0.0\",\n      \"status\": \"updated\"\n    }\n  },\n  \"meta\": {\n    \"message\": \"successfully updated service\"\n  }\n}",
       "response_headers": {
         "Content-Type": "application/json; charset=utf-8"
       },
       "response_content_type": "application/json; charset=utf-8",
-      "curl": "curl \"http://localhost:3000/api/service_registries/1\" -d '{\"service_registry\":{\"id\":1,\"data\":\"test_updated\"}}' -X PUT \\\n\t-H \"Accept: application/json\" \\\n\t-H \"Content-Type: application/json\" \\\n\t-H \"Host: example.org\" \\\n\t-H \"Cookie: \""
+      "curl": "curl \"http://localhost:3000/api/service_registries/1\" -d '{\"service\":\"test_updated\"}' -X PUT \\\n\t-H \"Accept: application/json\" \\\n\t-H \"Content-Type: application/json\" \\\n\t-H \"Host: example.org\" \\\n\t-H \"Cookie: \""
     }
   ]
 }

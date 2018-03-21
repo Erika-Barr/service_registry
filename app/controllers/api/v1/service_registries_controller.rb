@@ -1,66 +1,64 @@
 module Api
   module V1
     class ServiceRegistriesController < ApplicationController
+      #before_action :authenticate_api_user!, except: [:index, :with_version, :without_version]
       def create
-        @service = ServiceRegistry.create!(registry_params)
-        render json: { status: 201,
-                       message: "successfully created service",
-                       data: {
-                         service: "test1",
-                         version: "1.0.0",
-                         status:  "created"
-                       }
-                     }
+        @service = ServiceRegistry.new(registry_params)
+        if @service.save
+          @service.created!
+          options = {}
+          options[:meta] = { message: 'successfully created service' }
+          render json: ServiceRegistrySerializer.new(@service, options).serialized_json
+        end
       end
       def index
-        #redirect_to action: 'show' if registry_params.
-        render json: ServiceRegistry.all
+        @services = ServiceRegistry.all
+        options = {}
+        options[:meta] = [{ message: 'All services in service registry' }, { service_instance_count: @services.count }]
+        render json: ServiceRegistrySerializer.new(@services, options).serialized_json
       end
       def with_version
-        render json: { "status": 404,
-                       "message": "cannot find service records for requested version",
-                       "data": {
-                         "service": "test1",
-                         "version": "9.0.0",
-                         "status": "not_a_service"}
-        } and return if registry_params[:version] == '9.0.0'
-        render json: { "status": 200,
-                       "message": "list of service records for requested version",
-                       "data": {
-                         "service": "test1",
-                         "version": "1.0.0",
-                         "count": 2
-                       }
-                     }
+         @services = ServiceRegistry.all.service_with_version(registry_params[:service], registry_params[:version])
+         if @services.empty?
+           @service = ServiceRegistry.new(service: registry_params[:service], version: registry_params[:version])
+           options = {}
+           options[:meta] = [{ message: "cannot find service records for requested version" }, { service_instance_count: 0  }]
+           #byebug
+           render json: ServiceRegistrySerializer.new(@service, options).serialized_json
+           return
+         end
+         options = {}
+         options[:meta] = [{ message: 'list of services with specific version' }, { service_instance_count: @services.count }]
+         render json: ServiceRegistrySerializer.new(@services, options).serialized_json
       end
       def without_version
-        render json: { "status": 200,
-                       "message": "list of service records for requested version",
-                       "data": {
-                         "service": "test1",
-                         "count": 2
-                       }
-                      }
+         @services = ServiceRegistry.all.service_without_version(registry_params[:service])
+         options = {}
+         options[:meta] = [{ message: "list of services of type: #{registry_params[:service]}" }, { service_instance_count: @services.count }]
+         render json: ServiceRegistrySerializer.new(@services, options).serialized_json
       end
       def update
-        render json: { "status": 204,
-                       "message": "successfully updated service record",
-                       "data": {
-                         "service": "test_updated",
-                         "version": "1.0.0",
-                         "status": "updated" }
-                      }
+        @service = ServiceRegistry.find(params[:id])
+        if @service.update(service: registry_params[:service])
+          @service.updated!
+          options = {}
+          options[:meta] = { message: 'successfully updated service' }
+          render json: ServiceRegistrySerializer.new(@service, options).serialized_json
+        end
       end
       def destroy
-        render json: { "status": 204,
-                       "message": "successfully removed service",
-                       "data": {
-                         "status": "removed"
-                       }
-                     }
+        @service = ServiceRegistry.find(params[:id])
+        @service.removed!
+        options = {}
+        options[:meta] = { message: "successfully removed service" }
+        render json: ServiceRegistrySerializer.new(@service, options).serialized_json
+        @service.destroy!
       end
+
+      private
+
       def registry_params
-        params.require(:service_registry).permit(:service, :version)
+        params.permit(:service, :version)
       end
     end
   end

@@ -7,13 +7,11 @@
   "explanation": "returns number of service instances for a given version",
   "parameters": [
     {
-      "scope": "service_registry",
       "required": true,
       "name": "service",
       "description": "name of service"
     },
     {
-      "scope": "service_registry",
       "required": true,
       "name": "version",
       "description": "version number of service"
@@ -21,17 +19,14 @@
   ],
   "response_fields": [
     {
-      "scope": "service_registry",
       "name": "service",
       "description": "name of service"
     },
     {
-      "scope": "service_registry",
       "name": "version",
       "description": "version number of service"
     },
     {
-      "scope": "service_registry",
       "name": "count",
       "description": "number of service instances"
     }
@@ -39,27 +34,25 @@
   "requests": [
     {
       "request_method": "GET",
-      "request_path": "/api/service_registries/with_version?service_registry[service]=test1&service_registry[version]=1.0.0",
+      "request_path": "/api/service_registries/with_version?service=test&version=1.0.0",
       "request_body": null,
       "request_headers": {
         "Content-Type": "application/json",
         "Host": "example.org"
       },
       "request_query_parameters": {
-        "service_registry": {
-          "service": "test1",
-          "version": "1.0.0"
-        }
+        "service": "test",
+        "version": "1.0.0"
       },
       "request_content_type": "application/json",
       "response_status": 200,
       "response_status_text": "OK",
-      "response_body": "{\n  \"status\": 200,\n  \"message\": \"list of service records for requested version\",\n  \"data\": {\n    \"service\": \"test1\",\n    \"version\": \"1.0.0\",\n    \"count\": 2\n  }\n}",
+      "response_body": "{\n  \"data\": [\n    {\n      \"id\": \"1\",\n      \"type\": \"service_registry\",\n      \"attributes\": {\n        \"service\": \"test\",\n        \"version\": \"1.0.0\",\n        \"status\": \"created\"\n      }\n    }\n  ],\n  \"meta\": [\n    {\n      \"message\": \"list of services with specific version\"\n    },\n    {\n      \"service_instance_count\": 1\n    }\n  ]\n}",
       "response_headers": {
         "Content-Type": "application/json; charset=utf-8"
       },
       "response_content_type": "application/json; charset=utf-8",
-      "curl": "curl -g \"http://localhost:3000/api/service_registries/with_version?service_registry[service]=test1&service_registry[version]=1.0.0\" -X GET \\\n\t-H \"Accept: application/json\" \\\n\t-H \"Content-Type: application/json\" \\\n\t-H \"Host: example.org\" \\\n\t-H \"Cookie: \""
+      "curl": "curl -g \"http://localhost:3000/api/service_registries/with_version?service=test&version=1.0.0\" -X GET \\\n\t-H \"Accept: application/json\" \\\n\t-H \"Content-Type: application/json\" \\\n\t-H \"Host: example.org\" \\\n\t-H \"Cookie: \""
     }
   ]
 }

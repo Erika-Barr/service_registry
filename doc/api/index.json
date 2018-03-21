@@ -26,7 +26,7 @@
           "method": "get"
         },
         {
-          "description": "search for a service WITHOUT a specific version",
+          "description": "search for a service without a specific version",
           "link": "service_registry/search_for_a_service_without_a_specific_version.json",
           "groups": "all",
           "route": "/api/service_registries/without_version",
