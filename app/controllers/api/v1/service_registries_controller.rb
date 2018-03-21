@@ -23,7 +23,6 @@ module Api
            @service = ServiceRegistry.new(service: registry_params[:service], version: registry_params[:version])
            options = {}
            options[:meta] = [{ message: "cannot find service records for requested version" }, { service_instance_count: 0  }]
-           #byebug
            render json: ServiceRegistrySerializer.new(@service, options).serialized_json
            return
          end
